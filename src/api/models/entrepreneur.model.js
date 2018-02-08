@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
 
-const entrepreneurSchema = new mongoose.Schema ( {
+const entrepreneurSchema = new mongoose.Schema({
     firstName: {
         type: String,
         maxlength: 128,
-        index: true,
         trim: true,
     },
     lastName: {
         type: String,
         maxlength: 128,
-        index: true,
         trim: true,
     },
     address: {
@@ -71,7 +69,7 @@ const entrepreneurSchema = new mongoose.Schema ( {
         required: true
     },
     differAddress: {
-        type: true,
+        type: Boolean,
         default: false
     },
     emplpoymentStatus: {
@@ -81,7 +79,6 @@ const entrepreneurSchema = new mongoose.Schema ( {
     fatherMaidenName: {
         type: String,
         maxlength: 128,
-        index: true,
         trim: true,
     },
     firstSchoolAttendence: {
@@ -89,42 +86,48 @@ const entrepreneurSchema = new mongoose.Schema ( {
         maxlength: 128,
         trim: true,
     },
-    
+
     symbol: {
         type: String,
         required: true,
         trim: true,
     },
-    
+
     businessStatus: {
         type: String,
         required: true,
         trim: true,
     },
-    
+
     levelType: {
         type: String,
         required: true,
         trim: true,
     },
-    
+
     industry: {
         type: String,
         required: true,
         trim: true,
     },
-    
+
     targetMarket: {
         type: String,
         required: true,
         trim: true,
     },
-    
-    geographicDistribution: [],
 
+
+    geographicDistribution: [],
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
 },
+
+
     {
         timestamps: true,
-    } );
+    });
 
 module.exports = mongoose.model('entrepreneur', entrepreneurSchema);

@@ -30,6 +30,7 @@ exports.list = async (req, res, next) => {
 exports.create = async (req, res, next) => {
     try {
         let allowPromos, allowDifferAdress, serviceUpdate;
+        console.log(req.body);
 
         if (req.body.allowEmailsPromos) {
             allowPromos = true;
@@ -44,7 +45,8 @@ exports.create = async (req, res, next) => {
             serviceUpdate = false;
         }
         if (req.body.differAddress) {
-            allowDifferAdress = true
+
+            allowDifferAdress = true;
         }
         else {
             allowDifferAdress = false;
@@ -55,8 +57,8 @@ exports.create = async (req, res, next) => {
         req.body.differAddress = allowDifferAdress;
         req.body.userId = req.user.id;
 
-        const obj = await (new Investor(req.body));
-        const investor = await (obj.save());
+        const obj = await (new Entrepreneur(req.body));
+        const entrepreneur = await (obj.save());
         res.status(httpStatus.CREATED);
 
         return res.json({
