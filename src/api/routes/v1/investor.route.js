@@ -214,7 +214,7 @@ router
    * @apiDescription Delete a user
    * @apiVersion 1.0.0
    * @apiName DeleteUser
-   * @apiGroup User
+   * @apiGroup Investor
    * @apiPermission user
    *
    * @apiHeader {String} Athorization  User's access token

@@ -121,12 +121,6 @@ const entrepreneurSchema = new mongoose.Schema ( {
     },
     
     geographicDistribution: [],
-    
-    phoneNumber: {
-        type: Number,
-        required: true,
-        trim: true,
-    },
 
 },
     {
