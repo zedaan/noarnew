@@ -8,13 +8,11 @@ const investorSchema = new mongoose.Schema({
   firstName: {
     type: String,
     maxlength: 128,
-    index: true,
     trim: true,
   },
   lastName: {
     type: String,
     maxlength: 128,
-    index: true,
     trim: true,
   },
   address: {
@@ -44,11 +42,11 @@ const investorSchema = new mongoose.Schema({
   allowEmailsPromos:
     {
       type: Boolean,
-      default: false
+      
     },
   allowServiceUpdates: {
     type: Boolean,
-    default: false
+    
   },
   citizenship: {
     type: String,
@@ -75,8 +73,8 @@ const investorSchema = new mongoose.Schema({
     required: true
   },
   differAddress: {
-    type: true,
-    default: false
+    type: Boolean,
+  
   },
   emplpoymentStatus: {
     type: String,
@@ -85,7 +83,6 @@ const investorSchema = new mongoose.Schema({
   fatherMaidenName: {
     type: String,
     maxlength: 128,
-    index: true,
     trim: true,
   },
   firstSchoolAttendence: {
@@ -97,9 +94,13 @@ const investorSchema = new mongoose.Schema({
     type: String,
     maxlength: 128,
     trim: true,
-  }
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 }, {
     timestamps: true,
   });
 
-module.exports = mongoose.model('Investor', userSchema);
+module.exports = mongoose.model('Investor', investorSchema);
