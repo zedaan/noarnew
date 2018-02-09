@@ -99,8 +99,11 @@ const investorSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  attachments:{
+  esignature:{
     type:String
+  },
+  identity:{
+    type: String
   }
 }, {
     timestamps: true,
