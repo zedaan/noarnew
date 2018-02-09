@@ -53,7 +53,7 @@ exports.create = async (req, res, next) => {
         req.body.allowEmailsPromos = allowPromos;
         req.body.allowServiceUpdates = serviceUpdate;
         req.body.differAddress = allowDifferAdress;
-        req.body.userId = req.user.id;
+        req.body.userId = req.user.id;  
 
         const obj = await(new Investor(req.body));
         const investor = await(obj.save());
@@ -128,3 +128,25 @@ exports.remove = async (req, res, next) => {
             return res.json(error);
         }
 };
+/**
+ * Attachment
+ * @public
+ */
+exports.attachment = async (req, res, next) => {
+    try{
+        req.body.attachments = req.body.attachedFiles;
+        req.body.attachedFiles = null;
+        const investor = await Investor.update({
+            _id: req.params.id
+        },req.body);
+        res.status(httpStatus.OK)
+        return res.json({
+            success: true,
+            investor
+        })
+    }
+    catch(error){
+        return res.json(error);
+    }
+};
+

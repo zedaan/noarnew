@@ -8,7 +8,38 @@ const {
 } = require('../../validations/user.validation');
 
 const router = express.Router();
+const multer = require('multer');
+// to store file names
+let file_name_array = [];
 
+const storage = multer.diskStorage({
+
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/attachment/')
+  },
+
+  filename: function (req, file, cb) {
+
+    if (req.body.attachedFiles == null) {
+      file_name_array = [];
+    }
+
+    let ext = file.originalname.split(".");
+    ext = ext[ext.length - 1];
+
+    const filename = Date.now() + `.${ext}`;
+
+    file_name_array.push(filename);
+
+    req.body.attachedFiles = file_name_array;
+    cb(null, filename);
+
+  },
+
+
+})
+
+const upload = multer({ storage: storage }).array('attachments');
 
 
 router
@@ -238,6 +269,25 @@ router
      * @apiError (Not Found 404)    NotFound      User does not exist
      */
     .delete(authorize(LOGGED_USER), controller.remove);
+    router.
+    route('/attachment/:id')
+      /**
+     * @api {patch} v1/attachment/:id Update Attachment files
+     * @apiDescription Add Attachent files
+     * @apiVersion 1.0.0
+     * @apiName attachentFiles
+     * @apiGroup Entrepreneur
+     * @apiPermission user
+     *
+     * @apiHeader {String} Athorization  User's access token
+     *
+     * @apiSuccess attachment        entrepreneur's attachment
+     *
+     * @apiError (Unauthorized 401) Unauthorized  Only authenticated users can delete the data
+     * @apiError (Forbidden 403)    Forbidden     Only user with same id or admins can delete the data
+     * @apiError (Not Found 404)    NotFound      User does not exist
+     */
+    .patch(authorize(LOGGED_USER), upload, controller.attachment);
 
 
 module.exports = router;

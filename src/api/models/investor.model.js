@@ -99,6 +99,9 @@ const investorSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  attachments:{
+    type:String
+  }
 }, {
     timestamps: true,
   });
