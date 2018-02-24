@@ -112,7 +112,7 @@ const entrepreneurSchema = new mongoose.Schema({
     },
 
     targetMarket: {
-        type: String,
+        type: Object,
         required: true,
         trim: true,
     },

@@ -5,6 +5,7 @@ const APIError = require('../utils/APIError');
 
 const ADMIN = 'admin';
 const LOGGED_USER = '_loggedUser';
+const USER = 'user';
 
 const handleJWT = (req, res, next, roles) => async (err, user, info) => {
   const error = err || info;
@@ -43,6 +44,7 @@ const handleJWT = (req, res, next, roles) => async (err, user, info) => {
 
 exports.ADMIN = ADMIN;
 exports.LOGGED_USER = LOGGED_USER;
+exports.USER = USER;
 
 exports.authorize = (roles = User.roles) => (req, res, next) =>
   passport.authenticate(

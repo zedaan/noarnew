@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('express-validation');
 const controller = require('../../controllers/entrepreneur.controller');
-const { authorize, ADMIN, LOGGED_USER } = require('../../middlewares/auth');
+const { authorize, ADMIN, LOGGED_USER,USER } = require('../../middlewares/auth');
 const {
     createEntrepreneur,
     updateEntrepreneur
@@ -86,7 +86,7 @@ router
      * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
      * @apiError (Forbidden 403)     Forbidden     Only admins and loggin user can access the data
      */
-    .get(authorize(ADMIN), controller.list)
+    .get(authorize(ADMIN,USER), controller.list)
     /**
      * @api {post} v1/entrepreneurs Create Entrepreneur
      * @apiDescription Create a new user
@@ -134,7 +134,7 @@ router
      * @apiError (Unauthorized 401)  Unauthorized     Only authenticated users can create the data
      * @apiError (Forbidden 403)     Forbidden        Only admins can create the data
      */
-    .post(authorize(ADMIN, LOGGED_USER), controller.create);
+    .post(authorize(USER), controller.create);
 router
     .route('/:id')
     /**
