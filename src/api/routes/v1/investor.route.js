@@ -48,10 +48,8 @@ const upload = multer({ storage: storage }).array('attachments');
 
 
 
-
-router
-  .route('/')
-  /**
+router.route('/')
+/**
    * @api {get} v1/investors List Investors
    * @apiDescription Get a list of Investors
    * @apiVersion 1.0.0
@@ -75,21 +73,21 @@ router
    * @apiParam {String}  dateOfBirth              Investor's dateOfBirth
    * @apiParam {String}  identification           Investor's identification
    * @apiParam {String}  idNumber                 Investor's idNumber
-   * @apiParam {String}  issueDate                 Investor's issueDate   
+   * @apiParam {String}  issueDate                 Investor's issueDate
    * @apiParam {String}  expirationDate           Investor's expirationDate
    * @apiParam {String}  differAddress            Investor's differAddress
    * @apiParam {String}  emplpoymentStatus        Investor's emplpoymentStatus
    * @apiParam {String}  fatherMaidenName         Investor's fatherMaidenName
    * @apiParam {String}  firstSchoolAttendence    Investor's firstSchoolAttendence
    * @apiParam {String}  anticipateBalance        Investor's anticipateBalance
-   * 
+   *
    * @apiSuccess {Object[]} investor List of investors.
    *
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins and loggin user can access the data
    */
-.get(authorize(ADMIN, LOGGED_USER), controller.list)
-  /**
+  .get(authorize(ADMIN), controller.list)
+/**
    * @api {post} v1/investors Create Invester
    * @apiDescription Create a new user
    * @apiVersion 1.0.0
@@ -113,7 +111,7 @@ router
    * @apiParam {String}  dateOfBirth              Investor's dateOfBirth
    * @apiParam {String}  identification           Investor's identification
    * @apiParam {String}  idNumber                 Investor's idNumber
-   * @apiParam {String}  issueDate                 Investor's issueDate    
+   * @apiParam {String}  issueDate                 Investor's issueDate
    * @apiParam {String}  expirationDate           Investor's expirationDate
    * @apiParam {String}  differAddress            Investor's differAddress
    * @apiParam {String}  emplpoymentStatus        Investor's emplpoymentStatus
@@ -135,7 +133,7 @@ router
    * @apiSuccess (Created 201) {String}  dateOfBirth              Investor's dateOfBirth
    * @apiSuccess (Created 201) {String}  identification           Investor's identification
    * @apiSuccess (Created 201) {String}  idNumber                 Investor's idNumber
-   * @apiSuccess (Created 201) {String}  issueDate                Investor's issueDate   
+   * @apiSuccess (Created 201) {String}  issueDate                Investor's issueDate
    * @apiSuccess (Created 201) {String}  expirationDate           Investor's expirationDate
    * @apiSuccess (Created 201) {String}  differAddress            Investor's differAddress
    * @apiSuccess (Created 201) {String}  emplpoymentStatus        Investor's emplpoymentStatus
@@ -147,10 +145,9 @@ router
    * @apiError (Unauthorized 401)  Unauthorized     Only authenticated users can create the data
    * @apiError (Forbidden 403)     Forbidden        Only admins can create the data
    */
-  .post(authorize(ADMIN,LOGGED_USER,USER), controller.create);
-router
-  .route('/:id')
-  /**
+  .post(authorize(ADMIN, LOGGED_USER), controller.create);
+router.route('/:id')
+/**
    * @api {get} v1/investors/:id Get Investor
    * @apiDescription Get investor information
    * @apiVersion 1.0.0
@@ -174,7 +171,7 @@ router
    * @apiSuccess {String}  dateOfBirth              Investor's dateOfBirth
    * @apiSuccess {String}  identification           Investor's identification
    * @apiSuccess {String}  idNumber                 Investor's idNumber
-   * @apiSuccess {String}  issueDate                Investor's issueDate      
+   * @apiSuccess {String}  issueDate                Investor's issueDate
    * @apiSuccess {String}  expirationDate           Investor's expirationDate
    * @apiSuccess {String}  differAddress            Investor's differAddress
    * @apiSuccess {String}  emplpoymentStatus        Investor's emplpoymentStatus
@@ -186,8 +183,8 @@ router
    * @apiError (Forbidden 403)    Forbidden    Only user with same id or admins can access the data
    * @apiError (Not Found 404)    NotFound     User does not exist
    */
-  .get(authorize(LOGGED_USER,USER), controller.get)
-  /**
+  .get(authorize(LOGGED_USER), controller.get)
+/**
    * @api {patch} v1/investors/:id Update Investor
    * @apiDescription Update some fields of a Investor document
    * @apiVersion 1.0.0
@@ -211,7 +208,7 @@ router
    * @apiParam {String}  dateOfBirth              Investor's dateOfBirth
    * @apiParam {String}  identification           Investor's identification
    * @apiParam {String}  idNumber                 Investor's idNumber
-   * @apiParam {String}  issueDate                Investor's issueDate   
+   * @apiParam {String}  issueDate                Investor's issueDate
    * @apiParam {String}  expirationDate           Investor's expirationDate
    * @apiParam {String}  differAddress            Investor's differAddress
    * @apiParam {String}  emplpoymentStatus        Investor's emplpoymentStatus
@@ -233,7 +230,7 @@ router
    * @apiSuccess {String}  dateOfBirth              Investor's dateOfBirth
    * @apiSuccess {String}  identification           Investor's identification
    * @apiSuccess {String}  idNumber                 Investor's idNumber
-   * @apiSuccess {String}  issueDate                Investor's issueDate   
+   * @apiSuccess {String}  issueDate                Investor's issueDate
    * @apiSuccess {String}  expirationDate           Investor's expirationDate
    * @apiSuccess {String}  differAddress            Investor's differAddress
    * @apiSuccess {String}  emplpoymentStatus        Investor's emplpoymentStatus
@@ -246,8 +243,8 @@ router
    * @apiError (Forbidden 403)    Forbidden    Only user with same id or admins can modify the data
    * @apiError (Not Found 404)    NotFound     User does not exist
    */
-  .patch(authorize(LOGGED_USER,USER), controller.update)
-  /**
+  .patch(authorize(LOGGED_USER), controller.update)
+/**
    * @api {patch} v1/users/:id Delete User
    * @apiDescription Delete a user
    * @apiVersion 1.0.0
@@ -263,10 +260,9 @@ router
    * @apiError (Forbidden 403)    Forbidden     Only user with same id or admins can delete the data
    * @apiError (Not Found 404)    NotFound      User does not exist
    */
-  .delete(authorize(LOGGED_USER,USER), controller.remove);
-  router.
-  route('/esignature/:id')
-    /**
+  .delete(authorize(LOGGED_USER), controller.remove);
+router.route('/esignature/:id')
+/**
    * @api {patch} v1/esignature/:id Update Investor files
    * @apiDescription Add Investor files
    * @apiVersion 1.0.0
@@ -282,13 +278,9 @@ router
    * @apiError (Forbidden 403)    Forbidden     Only user with same id or admins can delete the data
    * @apiError (Not Found 404)    NotFound      User does not exist
    */
-<<<<<<< HEAD
-  .patch(authorize(LOGGED_USER,USER), upload, controller.attachment);
-=======
   .patch(authorize(LOGGED_USER), upload, controller.esignature);
-  router.
-  route('/identity/:id')
-    /**
+router.route('/identity/:id')
+/**
    * @api {patch} v1/identity/:id Update Identity files
    * @apiDescription Add identity files
    * @apiVersion 1.0.0
@@ -305,6 +297,5 @@ router
    * @apiError (Not Found 404)    NotFound      User does not exist
    */
   .patch(authorize(LOGGED_USER), upload, controller.identity);
->>>>>>> 0031dc847f8ccf423fffb6667a7772f025143420
 
 module.exports = router;
