@@ -129,12 +129,12 @@ exports.remove = async (req, res, next) => {
         }
 };
 /**
- * Attachment
+ * Esignature
  * @public
  */
-exports.attachment = async (req, res, next) => {
+exports.esignature = async (req, res, next) => {
     try{
-        req.body.attachments = req.body.attachedFiles;
+        req.body.esignature = req.body.attachedFiles;
         req.body.attachedFiles = null;
         const investor = await Investor.update({
             _id: req.params.id
@@ -143,6 +143,29 @@ exports.attachment = async (req, res, next) => {
         return res.json({
             success: true,
             investor
+        })
+    }
+    catch(error){
+        return res.json(error);
+    }
+};
+/**
+ * Identity
+ * @public
+ */
+exports.identity = async (req, res, next) => {
+    try{
+        req.body.identity = req.body.attachedFiles;
+        console.log(req.body.identity);
+        req.body.attachedFiles = null;
+        const investor = await Investor.update({
+            _id: req.params.id
+        },req.body);
+        res.status(httpStatus.OK)
+        return res.json({
+            success: true,
+            investor
+            
         })
     }
     catch(error){

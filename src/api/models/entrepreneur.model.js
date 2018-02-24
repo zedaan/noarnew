@@ -119,9 +119,12 @@ const entrepreneurSchema = new mongoose.Schema({
 
 
     geographicDistribution: [],
-    attachments :{
+    esignature:{
+        type:String
+      },
+      identity:{
         type: String
-    },
+      },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

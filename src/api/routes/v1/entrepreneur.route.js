@@ -270,24 +270,42 @@ router
      */
     .delete(authorize(LOGGED_USER), controller.remove);
     router.
-    route('/attachment/:id')
+    route('/esignature/:id')
       /**
-     * @api {patch} v1/attachment/:id Update Attachment files
+     * @api {patch} v1/esignature/:id Update Esignature files
      * @apiDescription Add Attachent files
      * @apiVersion 1.0.0
-     * @apiName attachentFiles
+     * @apiName esignatureFiles
      * @apiGroup Entrepreneur
      * @apiPermission user
      *
      * @apiHeader {String} Athorization  User's access token
      *
-     * @apiSuccess attachment        entrepreneur's attachment
+     * @apiSuccess esignature        entrepreneur's esignature
      *
      * @apiError (Unauthorized 401) Unauthorized  Only authenticated users can delete the data
      * @apiError (Forbidden 403)    Forbidden     Only user with same id or admins can delete the data
      * @apiError (Not Found 404)    NotFound      User does not exist
      */
-    .patch(authorize(LOGGED_USER), upload, controller.attachment);
-
+    .patch(authorize(LOGGED_USER), upload, controller.esignature);
+    router.
+    route('/identity/:id')
+      /**
+     * @api {patch} v1/identity/:id Update Identity files
+     * @apiDescription Add identity files
+     * @apiVersion 1.0.0
+     * @apiName entrepreneurFiles
+     * @apiGroup Entrepreneur
+     * @apiPermission user
+     *
+     * @apiHeader {String} Athorization  User's access token
+     *
+     * @apiSuccess identity        entrepreneur's identity
+     *
+     * @apiError (Unauthorized 401) Unauthorized  Only authenticated users can delete the data
+     * @apiError (Forbidden 403)    Forbidden     Only user with same id or admins can delete the data
+     * @apiError (Not Found 404)    NotFound      User does not exist
+     */
+    .patch(authorize(LOGGED_USER), upload, controller.identity);
 
 module.exports = router;
