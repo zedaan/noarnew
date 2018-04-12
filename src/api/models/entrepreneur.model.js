@@ -122,6 +122,9 @@ const entrepreneurSchema = new mongoose.Schema({
     esignature:{
         type:String
       },
+      attachmentType:{
+          type:String
+      },
       identity:{
         type: String
       },
